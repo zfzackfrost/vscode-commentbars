@@ -1,0 +1,269 @@
+{
+	"name": "commentbars",
+	"displayName": "Comment Bars",
+	"description": "Easily create comments that separate your code into sections.",
+	"version": "0.0.1",
+	"publisher": "zfzackfrost",
+	"engines": {
+		"vscode": "^1.28.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.generateAdvanced",
+		"onCommand:extension.generateQuick"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.generateAdvanced",
+				"title": "Comment Bars: Generate (Advanced)"
+			},
+			{
+				"command": "extension.generateQuick",
+				"title": "Comment Bars: Generate (Quick)"
+			}
+		],
+		"configuration": {
+			"title": "Comment Bars",
+			"properties": {
+				"commentbars.defaultFillChar": {
+					"type": "string",
+					"default": "-",
+					"description": "The the default value that is used as "
+				},
+				"commentbars.quickPresets": {
+					"markdownDescription": "The preset comment bar styles that are available to use in the *quick* commands.",
+					"default": [
+						{
+							"label": "Heavy",
+							"fillChar": "#",
+							"width": 75,
+							"thickness": 3,
+							"seamlessFill": true
+						},
+						{
+							"label": "Medium",
+							"fillChar": "=",
+							"width": 60,
+							"thickness": 3
+						},
+						{
+							"label": "Normal",
+							"fillChar": "~",
+							"width": 45,
+							"thickness": 1
+						},
+						{
+							"label": "Light",
+							"fillChar": "-",
+							"width": 30,
+							"thickness": 1
+						}
+					]
+				},
+				"commentbars.commentDelimsUser": {
+					"type": "object",
+					"markdownDescription": "The comment delimeters configuration that takes priority over `commentDelimsFallback`",
+					"default": {}
+				},
+				"commentbars.commentDelimsFallback": {
+					"type": "object",
+					"markdownDescription": "Fallback configuration for comment delimeters. Each key must map to an object with a `start` key (for the start delimeter). The `end` key (for the end delimeter) is optional.",
+					"default": {
+						"javascript": {
+							"start": "// ",
+							"end": " //"
+						},
+						"batch": {
+							"start": "REM "
+						},
+						"c": {
+							"start": "/* ",
+							"end": " */"
+						},
+						"csharp": {
+							"start": "// ",
+							"end": " //"
+						},
+						"cpp": {
+							"start": "// ",
+							"end": " //"
+						},
+						"css": {
+							"start": "/* ",
+							"end": " */"
+						},
+						"clojure": {
+							"start": "; "
+						},
+						"coffeescript": {
+							"start": "# "
+						},
+						"dockerfile": {
+							"start": "# ",
+							"end": " #"
+						},
+						"fsharp": {
+							"start": "// "
+						},
+						"go": {
+							"start": "// "
+						},
+						"groovy": {
+							"start": "// "
+						},
+						"hlsl": {
+							"start": "// ",
+							"end": " //"
+						},
+						"html": {
+							"start": "<!--",
+							"end": "-->"
+						},
+						"handlebars": {
+							"start": "{{!-- ",
+							"end": " --}}"
+						},
+						"ignore": {
+							"start": "#",
+							"end": "#"
+						},
+						"ini": {
+							"start": "# ",
+							"end": " #"
+						},
+						"jsonc": {
+							"start": "// "
+						},
+						"java": {
+							"start": "// ",
+							"end": " //"
+						},
+						"javascriptreact": {
+							"start": "// ",
+							"end": " //"
+						},
+						"jinja": {
+							"start": "{# ",
+							"end": " #}"
+						},
+						"less": {
+							"start": "// ",
+							"end": " //"
+						},
+						"lua": {
+							"start": "-- "
+						},
+						"makefile": {
+							"start": "# ",
+							"end": " #"
+						},
+						"markdown": {
+							"start": "<!--",
+							"end": "-->"
+						},
+						"objective-c": {
+							"start": "// ",
+							"end": " //"
+						},
+						"objective-cpp": {
+							"start": "// ",
+							"end": " //"
+						},
+						"php": {
+							"start": "// ",
+							"end": " //"
+						},
+						"perl": {
+							"start": "# "
+						},
+						"powershell": {
+							"start": "<# ",
+							"end": " #>"
+						},
+						"jade": {
+							"start": "//- ",
+							"emd": " -//"
+						},
+						"python": {
+							"start": "# ",
+							"end": " #"
+						},
+						"r": {
+							"start": "# "
+						},
+						"razor": {
+							"start": "@* ",
+							"end": " *@"
+						},
+						"ruby": {
+							"start": "# ",
+							"end": " #"
+						},
+						"rust": {
+							"start": "// "
+						},
+						"scss": {
+							"start": "// ",
+							"end": " //"
+						},
+						"shaderlab": {
+							"start": "// ",
+							"end": " //"
+						},
+						"shellscript": {
+							"start": "# ",
+							"end": " #"
+						},
+						"swift": {
+							"start": "// ",
+							"end": " //"
+						},
+						"typescript": {
+							"start": "// ",
+							"end": " //"
+						},
+						"typescriptreact": {
+							"start": "// ",
+							"end": " //"
+						},
+						"vb": {
+							"start": "'"
+						},
+						"xml": {
+							"start": "<!--",
+							"end": "-->"
+						},
+						"yaml": {
+							"start": "# ",
+							"emd": " #"
+						},
+						"pip-requirements": {
+							"start": "# ",
+							"end": " #"
+						}
+					}
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/lodash": "^4.14.118",
+		"@types/mocha": "^2.2.42",
+		"@types/node": "^8.10.25",
+		"lodash": "^4.17.11",
+		"tslint": "^5.8.0",
+		"typescript": "^2.6.1",
+		"vscode": "^1.1.21"
+	}
+}
