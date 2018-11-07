@@ -26,7 +26,7 @@
 		"organize",
 		"code"
 	],
-	"icon": "assets/icon256.png",
+	"icon": "icon256.png",
 	"galleryBanner": {
 		"color": "#ff2727ff",
 		"theme": "dark"
