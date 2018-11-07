@@ -1,65 +1,80 @@
-# comment-bars README
+# Comment Bars
 
-This is the README for your extension "comment-bars". After writing up a brief description, we recommend including the following sections.
+## What's a Comment Bar anyway?
 
-## Features
+**Comment Bars**, in the context of this extension, are comments in your
+code that help to separate your work into logical sections. Here are some 
+Comment Bars using C-style comments:
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+Plain separator, no text:
+```c
+/* ====================================================== */
+/* ====================================================== */
+/* ====================================================== */
+```
 
-For example if there is an image subfolder under your extension project workspace:
+Same as above, with added text:
+```c
+/* ====================================================== */
+/* ================== Comment Bars Rock ================= */
+/* ====================================================== */
+```
 
-\!\[feature X\]\(images/feature-x.png\)
+Want to customize width, dash (fill) character or thickness? No problem!
+```c
+/* -------- Thinner ------- */
+```
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+The Comment Bars extension automatically generates these separators.
 
-## Requirements
+## Additional Terminology
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+In order to use this extension there are a few terms that you should 
+be aware of. 
 
-## Extension Settings
+- *fill character* &mdash; A single character of text that 
+   is repeated across the entire width of the comment bar.
+- *comment delimter* &mdash; The string of code that a programming
+   language looks for to indicate the beginning or end of a comment.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+## Comment Bars Commands
 
-For example:
+## Comment Bars Settings
 
-This extension contributes the following settings:
+This extension is highly configurable. The following lists the 
+available settings for customizing the plugin:
 
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
+- `commentbars.defaultFillChar` &mdash;
+- `quickPresets` &mdash;
+- `commentDelimsUser` 
+   (see [Delimeter Configuration](#comment-delimeters-configuration)) 
+   &mdash; The set of comment delimeters that is meant to be
+   overridden by the user. The default value is empty. 
+- `commentDelimsFallback`
+  (see [Delimeter Configuration](#comment-delimeters-configuration)) 
+  &mdash; The default set of comment delimeters. This should
+  usually be left at the default. The intended use of this setting is to only override
+  the default if there is an error in the default settings (As much as I would like to,
+  I don't know every programming lanuguage VSCode supports!). **For customizations and 
+  additions, use `commentDelimsUser` instead**.
+ 
+### Comment Delimeters Configuration
 
 ## Known Issues
+*If you spot any bugs, __please__ open a new issue at this extension's 
+GitHub repository!*
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+The following is a list of all major issues with the *Comment Bars*
+extension:
+- There are no known issues at this time
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### 0.0.1
+First preview release
 
-### 1.0.0
 
-Initial release of ...
 
-### 1.0.1
+----------------------------------------------------------------------------
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+**Happy Coding!**
