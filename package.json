@@ -12,18 +12,18 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.generateAdvanced",
-		"onCommand:extension.generateQuick"
+		"onCommand:commentbars.generateAdvanced",
+		"onCommand:commentbars.generateQuick"
 	],
 	"main": "./out/extension",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.generateAdvanced",
+				"command": "commentbars.generateAdvanced",
 				"title": "Comment Bars: Generate (Advanced)"
 			},
 			{
-				"command": "extension.generateQuick",
+				"command": "commentbars.generateQuick",
 				"title": "Comment Bars: Generate (Quick)"
 			}
 		],

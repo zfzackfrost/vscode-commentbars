@@ -21,11 +21,11 @@ export function activate(context: ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	let genAdvancedDisp = Commands.registerCommand('extension.generateAdvanced', async () => {
+	let genAdvancedDisp = Commands.registerCommand('commentbars.generateAdvanced', async () => {
 		await GenerateBar.commentBarGenerateCommand(true);
 	});
 
-	let genQuickDisp = Commands.registerCommand('extension.generateQuick', async () => {
+	let genQuickDisp = Commands.registerCommand('commentbars.generateQuick', async () => {
 		await GenerateBar.commentBarGenerateCommand(false);
 	});
 	context.subscriptions.push(genAdvancedDisp);
