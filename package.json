@@ -12,9 +12,25 @@
 	"engines": {
 		"vscode": "^1.28.0"
 	},
+	"bugs": {
+		"url": "https://github.com/zfzackfrost/vscode-commentbars/issues"
+	},
 	"categories": [
+		"Formatters",
 		"Other"
 	],
+	"keywords": [
+		"comment",
+		"separator",
+		"group",
+		"organize",
+		"code"
+	],
+	"icon": "assets/icon256.png",
+	"galleryBanner": {
+		"color": "#ff2727ff",
+		"theme": "dark"
+	},
 	"activationEvents": [
 		"onCommand:commentbars.generateAdvanced",
 		"onCommand:commentbars.generateQuick"
