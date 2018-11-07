@@ -64,7 +64,7 @@ filling turned on):
 # ======================= Seamless? ====================== #
 # ======================================================== #
 ```
-Notice that the spaces between the comment delimeters come back now.
+Notice that the spaces between the comment delimeters 
 and the fill characters come back now. This is the intended operation
 of seamless filling. 
 
