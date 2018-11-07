@@ -82,9 +82,39 @@ be aware of.
 - *comment delimter* &mdash; The string of code that a programming
    language looks for to indicate the beginning or end of a comment.
 
-## Comment Bars Commands
+## Commands and Instructions
 
-## Comment Bars Settings
+- `commentbars.generateAdvanced` &mdash; labeled "Comment Bars:
+   Generate (Advanced)"  in Command Palette. Generate a comment 
+   bar using *Advanced* mode. 
+  
+  **Command Instructions:**
+   1. If you wish for your comment bar to contain text, type the text
+      on an empty line and select it. Otherwise move the cursor to 
+	  the empty line where you wish to insert the comment bar.
+   2. Open the Command Palette: `Ctrl+Shift+P` on Windows and Linux, 
+      `Cmd+Shift+P` on Mac
+   3. Find and run the command called *Comment Bars: Generate (Advanced)*
+   4. Enter the the requested information in the boxes that pop up at
+      the top of the editor.
+
+- `commentbars.generateQuick` &mdash; labeled "Comment Bars:
+   Generate (Quick)" in Command Palette. Generate a comment bar
+   using a preset style (*Quick* mode).
+
+   **Command Instructions:**
+   1. If you wish for your comment bar to contain text, type the text
+      on an empty line and select it. Otherwise move the cursor to 
+	  the empty line where you wish to insert the comment bar.
+   2. Open the Command Palette: `Ctrl+Shift+P` on Windows and Linux, 
+      `Cmd+Shift+P` on Mac
+   3. Find and run the command called *Comment Bars: Generate (Quick)*
+   4. Select the appropriate comment bar preset style from the list.
+      > **Tip** <br/>
+	  > The presets can be customized with the `commentbars.quickPresets`
+	  > setting.
+
+## Settings
 
 This extension is highly configurable. The following lists the 
 available settings for customizing the plugin:
