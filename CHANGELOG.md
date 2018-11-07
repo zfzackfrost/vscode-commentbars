@@ -1,7 +1,13 @@
 # Change Log
+
 All notable changes to the "comment-bars" extension will be documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## Unreleased
 
-## [Unreleased]
-- Initial release
+- First preview release
+
+-----------------------------------------------------------------------------------------
+
+## Release History
+
+### [0.0.1]
