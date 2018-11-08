@@ -20,15 +20,13 @@ export function activate(context: ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with  registerCommand
 	// The commandId parameter must match the command field in package.json
-	let genAdvancedDisp = Commands.registerCommand('commentbars.generateAdvanced', async () => {
-		await GenerateBar.commentBarGenerateCommand(true);
-	});
+	context.subscriptions.push(Commands.registerCommand('commentbars.generateAdvanced',  () => {
+		GenerateBar.commentBarGenerateCommand(true);
+	}));
 
-	let genQuickDisp = Commands.registerCommand('commentbars.generateQuick', async () => {
-		await GenerateBar.commentBarGenerateCommand(false);
-	});
-	context.subscriptions.push(genAdvancedDisp);
-	context.subscriptions.push(genQuickDisp);
+	context.subscriptions.push(Commands.registerCommand('commentbars.generateQuick', () => {
+		GenerateBar.commentBarGenerateCommand(false);
+	}));
 }
 
 // this method is called when your extension is deactivated
