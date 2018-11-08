@@ -6,7 +6,7 @@
 	},
 	"displayName": "Comment Bars",
 	"description": "Easily create comments that separate your code into sections.",
-	"version": "0.0.5",
+	"version": "0.0.1",
 	"publisher": "zfzackfrost",
 	"preview": true,
 	"engines": {
