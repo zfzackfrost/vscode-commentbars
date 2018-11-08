@@ -278,6 +278,10 @@
 		"postinstall": "node ./node_modules/vscode/bin/install",
 		"test": "npm run compile && node ./node_modules/vscode/bin/test"
 	},
+	"dependencies": {
+		"lodash": "^4.17.11",
+		"vscode": "^1.1.21"
+	},
 	"devDependencies": {
 		"@types/lodash": "^4.14.118",
 		"@types/mocha": "^2.2.42",
