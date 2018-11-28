@@ -280,13 +280,12 @@
 	},
 	"dependencies": {
 		"lodash": "^4.17.11",
-		"vscode": "^1.1.21"
+		"vscode": "^1.1.22"
 	},
 	"devDependencies": {
 		"@types/lodash": "^4.14.118",
 		"@types/mocha": "^2.2.42",
 		"@types/node": "^8.10.25",
-		"lodash": "^4.17.11",
 		"tslint": "^5.8.0",
 		"typescript": "^2.6.1",
 		"vscode": "^1.1.21"
