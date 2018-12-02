@@ -21,6 +21,9 @@ export interface LanguageCommentDelims {
 
 /**
  * Type of comment delimiter configuration object
+ * 
+ * @export
+ * @type {Object.<string, LanguageCommentDelims>}
  */
 export type CommentDelimsConfig = { [key: string]: LanguageCommentDelims };
 
