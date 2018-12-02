@@ -13,18 +13,15 @@ import * as GenerateBar from './generateBar';
 // your extension is activated the very first time the command is executed
 export function activate(context: ExtensionContext) {
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "commentbars" is now active!');
-
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
+	// Register command: "commentbars.generateAdvanced"
 	context.subscriptions.push(Commands.registerCommand('commentbars.generateAdvanced',  () => {
+		// Execute command function
 		GenerateBar.commentBarGenerateCommand(true);
 	}));
 
+	// Register command: "commentbars.generateQuick"
 	context.subscriptions.push(Commands.registerCommand('commentbars.generateQuick', () => {
+		// Execute command function
 		GenerateBar.commentBarGenerateCommand(false);
 	}));
 }
