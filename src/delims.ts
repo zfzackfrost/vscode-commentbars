@@ -33,7 +33,7 @@ export type CommentDelimsConfig = { [key: string]: LanguageCommentDelims };
  * comment delimiter configuration, `false` otherwise.
  */
 export function isLanguageDelimsConfig(configOrError: LanguageCommentDelims | string): configOrError is LanguageCommentDelims {
-	return (typeof configOrError !== "string") && (<LanguageCommentDelims>configOrError).start !== undefined);
+	return (typeof configOrError !== "string") && ((<LanguageCommentDelims>configOrError).start !== undefined);
 }
 
 
