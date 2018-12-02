@@ -23,7 +23,6 @@ import * as _ from "lodash";
 import * as Presets from "./presets";
 import * as Delims from "./delims";
 
-
 /**
  * Create the text for a single line of a comment bar.
  *
@@ -105,10 +104,10 @@ export function buildCommentBarLine(
 	// The fill character repeated `lengthAfter` times.
 	const fillAfter = _.repeat(fillChar, lengthAfter);
 
-	// Starting text that gets placed before the contents of the comment bar (i.e. starting comment 
+	// Starting text that gets placed before the contents of the comment bar (i.e. starting comment
 	// delimiter and fill characters)
 	const lineBefore = `${startCmt}${fillBefore}`;
-	// Starting text that gets placed after the contents of the comment bar (i.e. fill characters 
+	// Starting text that gets placed after the contents of the comment bar (i.e. fill characters
 	// and ending comment delimiters)
 	const lineAfter = `${fillAfter}${endCmt}`;
 	// The final assembled text of the comment bar line!
@@ -160,9 +159,10 @@ export function buildCommentBar(
 					seamlessFill
 				)
 			);
-		} else { // Otherwise, not a center line...
+		} else {
+			// Otherwise, not a center line...
 
-			// Generate a fill line and add it to the 
+			// Generate a fill line and add it to the
 			// running array of lines
 			lines.push(
 				buildCommentBarLine(
@@ -180,7 +180,7 @@ export function buildCommentBar(
 	return lines;
 }
 /**
- * Replace a selection with a comment bar. 
+ * Replace a selection with a comment bar.
  *
  * @param {string[]} lines - The lines of the comment bar to insert
  * @param {Editor} editor - The current vscode `TextEditor` object to operate on
@@ -199,89 +199,146 @@ async function insertCommentBar(
 		editBuilder.replace(selection, _.join(lines, "\n"));
 	});
 }
-
+/**
+ * Implementations for the "Generate" commands (both the advanced and quick variations).
+ *
+ * @export
+ * @param {boolean} advanced - If `true`, the "advanced" variation of the "Generate" command will be run.
+ * Otherwise, the "Quick" variation will be executed.
+ * @returns {Promise<any>} A `Promise` that resolves when the command is finished executing.
+ */
 export async function commentBarGenerateCommand(
 	advanced: boolean
 ): Promise<any> {
-	let editor = Window.activeTextEditor;
+	// The active `TextEditor` object in VSCode
+	let editor: Editor = Window.activeTextEditor;
+
+	// If there is not currently a text editor active...
 	if (!editor) {
+		// Show an error message to the user...
 		Window.showErrorMessage(
 			"There must be an active file to use this command!"
 		);
+		// ... And stop the command here.
 		return;
 	}
 
+	// Get the user configuration fot this extension
 	let config = Workspace.getConfiguration("commentbars");
 
-	let thickness: number = 0;
-	let width: number = 0;
-	let fillChar: string = "";
-	let seamlessFill = false;
+	let thickness: number = 0; // Thickness of the comment bar to generate
+	let width: number = 0; // Width of the comment bar to generate
+	let fillChar: string = ""; // Fill character of the comment bar to generate
+	let seamlessFill = false; // Should the comment bar use seamless filling?
 
-	let defaultFillChar: string | null | undefined = null;
+	let defaultFillChar: string | null | undefined = null; // The default fill character
+
+	// The current Language ID
 	let languageId = editor.document.languageId;
+	// Get the comment delimiters for the current language, or an error if none are found.
 	let commentDelimsOrError:
 		| Delims.LanguageCommentDelims
 		| string = Delims.processCommentDelimsConfig(config, languageId);
 
+	// If the `commentDelimsOrError` is an INVALID comment delimiter configuration.
 	if (!Delims.isLanguageDelimsConfig(commentDelimsOrError)) {
+		// Show the error message that it must be, if it is not a valid configuration.
 		Window.showErrorMessage(commentDelimsOrError);
+		// Stop the command here.
 		return;
 	}
 
+	// The selected text in the active editor.
+	// Will be used as the content text of the comment bar.
 	let text: string | null | undefined = null;
+	// The current editor's text selection
 	let edtSelection = editor.selection;
+
+	// If the active editor's text selection is empty...
 	if (edtSelection.isEmpty) {
+		// Set comment bar text content to an empty string
 		text = "";
 	} else {
+		// Else, active editor has selection of non-zero length...
+
+		// If selection does not span multiple lines...
 		if (edtSelection.isSingleLine) {
+			// Set comment bar text to selected text
 			text = editor.document.getText(edtSelection);
 		} else {
+			// Else, multiple lines are selected (currently unsupported)
+
+			// Show error message to the user.
 			Window.showErrorMessage(
 				"Multi-line comment bar text is not supported!"
 			);
+			// Stop command here.
 			return;
 		}
 	}
 
-	// ------------- Pick comment bar thickness -------------
+	// If advanced mode is enabled...
 	if (advanced) {
+		// ====================== Advanced ====================== //
+
+		// ------------- Pick comment bar thickness -------------
+
+		// Options for comment bar thickness input box
 		let thickOpts: InputBoxOptions = {
 			prompt: "Enter comment bar thickness (by number of lines):",
 			placeHolder:
 				"Enter thickness in # of lines (Will be rounded to an ODD number)"
 		};
+		// Display input box to user and get the string that is entered
 		let thicknessChoice = await Window.showInputBox(thickOpts);
 
-		if (!thicknessChoice) {
+		// Convert the string retrieved from thickness input box to a number
+		thickness = Number(thicknessChoice);
+
+		// If the thickness is not a number (i.e. NaN) ...
+		if (isNaN(thickness)) {
+			// Show an error message to the user
+			Window.showErrorMessage("Comment bar thickness must be a number!");
+			// Stop the command here.
 			return;
 		}
 
-		thickness = Number(thicknessChoice);
-
 		// ------------- Pick comment bar width -------------
 
+		// Options for comment bar width input box
 		let widthOpts: InputBoxOptions = {
 			prompt:
 				"Enter the the width of the comment bar (by number of characters)"
 		};
+		// Display input box to user and get the string that is entered
 		let widthInput = await Window.showInputBox(widthOpts);
+
+		// Convert the string retrieved from width input box to a number
 		width = Number(widthInput);
 
+		// If the width is not a number (i.e. NaN) ...
 		if (isNaN(width)) {
+			// Show an error message to the user
 			Window.showErrorMessage("Comment bar width must be a number!");
+			// Stop the command here.
 			return;
 		}
 
+		// If the user configuration has `defaultFillChar`...
 		if (config.has("defaultFillChar")) {
+			// Get the default fill character from the user configuration
 			defaultFillChar = config.get("defaultFillChar");
 		}
 
+		// Options for comment bar fill character input box
 		let fillOpts: InputBoxOptions = {
 			prompt:
 				"Enter the fill character (Default can be set in preferences)"
 		};
+		// Display input box to user and get the string that is entered
 		let fillCharInput = await Window.showInputBox(fillOpts);
+
+		// Set fill character with fallbacks.
 		fillChar =
 			fillCharInput && fillCharInput.length === 1
 				? fillCharInput
@@ -289,11 +346,21 @@ export async function commentBarGenerateCommand(
 				? defaultFillChar
 				: "-";
 	} else {
+		// Else, use quick mode
+
+		// ======================== Quick ======================= //
+
+		// The quick pick options, for the style preset selection box
 		let styleOpts: QuickPickOptions = {
 			placeHolder: "Choose comment bar style preset (by number of lines):"
 		};
+		// Get all of the available quick mode presets, from the user's configuration
 		let presetsConfig = Presets.getCommentBarPresets(config);
+
+		// If there is at least one quick mode preset...
 		if (_.isArray(presetsConfig) && presetsConfig.length > 0) {
+			// Create an array of `QuickPickItem` objects from the array of
+			// `QuickPreset` objects.
 			let items: QuickPickItem[] = _.map(
 				presetsConfig,
 				(preset: Presets.QuickPreset) => {
@@ -308,9 +375,12 @@ export async function commentBarGenerateCommand(
 					};
 				}
 			);
+			// Display quick pick to user and get the item that is chosen
 			let styleChoice:
 				| QuickPickItem
 				| undefined = await Window.showQuickPick(items, styleOpts);
+
+			// Find the index of the preset style that has the same label as the user's choice
 			let presetIdx = _.findIndex(
 				presetsConfig,
 				(
@@ -326,22 +396,35 @@ export async function commentBarGenerateCommand(
 					return false;
 				}
 			);
+			// If a quick preset was found that matches the user's choice...
 			if (presetIdx >= 0) {
+				// Get the preset object at the index that was found
 				let preset = presetsConfig[presetIdx];
-				width = preset.width;
-				thickness = preset.thickness;
-				fillChar = preset.fillChar;
-				seamlessFill = _.isBoolean(preset.seamlessFill)
+
+				width = preset.width; // Set the width to the preset's width
+				thickness = preset.thickness; // Set the thickness to the preset's thickness
+				fillChar = preset.fillChar; // Set the fill character to the preset's fill character
+				seamlessFill = _.isBoolean(preset.seamlessFill) // Set value of the seamless filling flag to the preset's value
 					? preset.seamlessFill
 					: false;
 			}
 		}
 	}
+
+	// ?: Is this block needed still?
 	if (config.has("defaultFillChar")) {
 		defaultFillChar = config.get("defaultFillChar");
 	}
 
+	// Check if the following conditions are met:
+	//    - `commentDelimsOrError` is truthy
+	//    - `fillChar` is truthy
+	//    - `text` is not `null` 
 	if (commentDelimsOrError && fillChar && text !== null) {
+
+		// Generate the lines for a comment bar, using the
+		// style that was entered by the user. Store the
+		// returned array of lines in this local variable.
 		let lines: string[] = buildCommentBar(
 			width,
 			text,
@@ -350,10 +433,16 @@ export async function commentBarGenerateCommand(
 			commentDelimsOrError,
 			seamlessFill
 		);
+
+		// If the array of comment bar lines is truthy.
 		if (lines) {
+			// Replace the current text selection with a comment bar and wait for
+			// the completion of the edit.
 			await insertCommentBar(lines, editor, edtSelection);
 		}
-	} else {
+	} else { // Else, something was configured wrong...
+
+		// Display an error to the user.
 		Window.showErrorMessage("Invalid config!");
 	}
 }
