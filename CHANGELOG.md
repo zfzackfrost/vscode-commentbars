@@ -5,7 +5,16 @@ All notable changes to the "comment-bars" extension will be documented in this f
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
------------------------------------------------------------------------------------------
+---------------------------------------------
+
+## Unreleased / Work-in-Progress
+
+- **Added**: Commands (Quick and Advanced versions) to change 
+  the text of a comment bar without altering the width.
+- **Added**: Commands (Quick and Advanced versions) to change
+  the width of a comment bar, and also keep the text centered.
+
+--------------------------------------------
 
 ## Release History
 
@@ -24,6 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   the NPM package `event-streams`. *DO NOT* run or install this
   version of the extension. Read more [here][event-stream-vscode-blog].
 
+-------------------------------------------
+
+## Current Release
+
 ### [0.0.10]
 
 - **Fixed**, ***Security***: Fixed the Issue #1 on GitHub. This issue
@@ -33,6 +46,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   This has now been fixed by following steps given for extension authors
   on the VSCode Blog post. Approval is still needed from Microsoft for this extension to
   be hosted on the VSCode marketplace. Read more [here][event-stream-vscode-blog].
-
 
 [event-stream-vscode-blog]: https://code.visualstudio.com/blogs/2018/11/26/event-stream
