@@ -1,5 +1,18 @@
 # Comment Bars
 
+- [Comment Bars](#comment-bars)
+  - [Features](#features)
+    - [Seamless Filling](#seamless-filling)
+      - [Activating Seamless Filling](#activating-seamless-filling)
+  - [Terminology](#terminology)
+  - [Commands and Instructions](#commands-and-instructions)
+  - [Settings](#settings)
+  - [Advanced Configuration](#advanced-configuration)
+    - [Comment Delimeter Settings](#comment-delimeter-settings)
+      - [Default Comment Delimeters](#default-comment-delimeters)
+  - [Known Issues](#known-issues)
+  - [Release Notes](#release-notes)
+
 ## Features
 
 **Comment Bars**, in the context of this extension, are comments in your
@@ -184,7 +197,7 @@ following format (Documentation formatting loosely based on
 - `object`\[`languageId` (`string`)] &mdash; `languageId`
   is the key of the object. Each key should be a Visual Studio
   Code language identifier. See [Language Id][Language-ID-Link]
-  in VSCode documentation for more.a
+  in VSCode documentation for more.
 
   - (object) &mdash; Value corresponding to each `languageId` key above
 
